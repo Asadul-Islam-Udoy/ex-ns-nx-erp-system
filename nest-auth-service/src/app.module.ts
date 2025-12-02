@@ -12,12 +12,12 @@ import * as bcrypt from 'bcrypt';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (config: ConfigService) => ({
-        type: 'mysql',
-        host: config.get('DB_HOST'),
-        port: +config.get('DB_PORT'),
-        username: config.get('DB_USER'),
-        password: config.get('DB_PASS'),
-        database: config.get('DB_NAME'),
+        type: 'postgres',
+        host: config.get('POSTGRES_HOST'),
+        port: +config.get('POSTGRES_PORT'),
+        username: config.get('POSTGRES_USER'),
+        password: config.get('POSTGRES_PASSWORD'),
+        database: config.get('POSTGRES_DB'),
         autoLoadEntities: true,
         synchronize: true,
       }),
@@ -31,7 +31,7 @@ export class AppModule implements OnModuleInit {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-  ) {}
+  ) { }
 
   async onModuleInit() {
     const existing = await this.userRepository.findOne({
