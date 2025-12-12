@@ -28,10 +28,7 @@ import * as bcrypt from 'bcrypt';
   ],
 })
 export class AppModule implements OnModuleInit {
-  constructor(
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
-  ) { }
+  constructor(@InjectRepository(User) private userRepository: Repository<User>) { }
 
   async onModuleInit() {
     const existing = await this.userRepository.findOne({
