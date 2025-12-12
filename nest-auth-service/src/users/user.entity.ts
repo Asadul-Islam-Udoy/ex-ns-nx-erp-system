@@ -44,6 +44,15 @@ export class User {
     this.password = await bcrypt.hash(this.password, 10);
   }
   @Column({ default: true }) status: boolean;
+
+  @Column({ default: false })
+  isEmailVerified: boolean;
+
+  @Column({ nullable: true })
+  emailVerificationToken: string;
+
+  @Column({ nullable: true })
+  emailVerificationTokenExpries: Date;
   @CreateDateColumn() createdAt: Date;
   @UpdateDateColumn() updatedAt: Date;
 }
